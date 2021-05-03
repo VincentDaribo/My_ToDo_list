@@ -1,2 +1,3 @@
 # My_ToDo_list
-Source code of the Back-end of a ToDo list
+
+The goal of this project was to build the back-end of a ToDo list by using Node.js and mysql.
