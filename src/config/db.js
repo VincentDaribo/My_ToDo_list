@@ -9,7 +9,6 @@ const db = mysql.createConnection({
   multipleStatements: true
 });
 
-
 db.connect(function(err) {
   if (err) throw err;
   console.log("You are connected!");

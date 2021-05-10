@@ -1,0 +1,31 @@
+version: "3.3"
+services:
+  db:
+    image: mysql
+    restart: always
+    environment:
+      MYSQL_HOST: $MYSQL_HOST
+      MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
+      MYSQL_DATABASE: $MYSQL_DATABASE
+    ports: 
+      - 3306:3306
+    volumes: 
+      - db-config:/var/lib/mysql
+    networks:
+      - my_todo
+  app:
+    build: './'
+    expose:
+      - 8080
+    ports:
+      - 8080:8080
+    restart: always
+    depends_on: 
+      - db
+    networks:
+      - my_todo
+
+networks:
+  my_todo:
+volumes: 
+  db-config:
