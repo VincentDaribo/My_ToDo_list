@@ -1,20 +1,21 @@
 version: "3.3"
+
 services:
   db:
     image: mysql
     restart: always
+    env_file: ./.env
     environment:
-      MYSQL_HOST: $MYSQL_HOST
       MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
       MYSQL_DATABASE: $MYSQL_DATABASE
     ports: 
       - 3306:3306
     volumes: 
       - db-config:/var/lib/mysql
-    networks:
-      - my_todo
+    network_mode: host
   app:
     build: './'
+    image: node-mysql-app
     expose:
       - 8080
     ports:
@@ -22,10 +23,6 @@ services:
     restart: always
     depends_on: 
       - db
-    networks:
-      - my_todo
-
-networks:
-  my_todo:
+    network_mode: host
 volumes: 
   db-config:
